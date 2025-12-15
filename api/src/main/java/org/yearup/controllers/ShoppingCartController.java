@@ -20,7 +20,6 @@ import java.security.Principal;
 @PreAuthorize("hasRole('ROLE_USER')")
 @CrossOrigin
 public class ShoppingCartController {
-    // a shopping cart requires
     private ShoppingCartDao shoppingCartDao;
     private UserDao userDao;
     private ProductDao productDao;
@@ -50,47 +49,36 @@ public class ShoppingCartController {
         }
     }
 
-    // add a POST method to add a product to the cart - the url should be
-    // https://localhost:8080/cart/products/15 (15 is the productId to be added
-    @PostMapping("{id}")
+    @PostMapping("products/{id}")
     public ShoppingCartItem addItem(Principal principal, @PathVariable int id) {
         try {
             String userName = principal.getName();
             User user = userDao.getByUserName(userName);
             int userId = user.getId();
-            Product product = productDao.getById(id);
 
-            return shoppingCartDao.addToCart(userId, product);
+            return shoppingCartDao.addToCart(userId, id);
         }
         catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR: Internal server error when adding to cart.");
         }
     }
 
-    // add a PUT method to update an existing product in the cart - the url should be
-    // https://localhost:8080/cart/products/15 (15 is the productId to be updated)
-    // the BODY should be a ShoppingCartItem - quantity is the only value that will be updated
-    @PutMapping("{id}")
+    @PutMapping("products/{id}")
     public void updateItem(Principal principal, @PathVariable int id, @RequestBody ShoppingCartItem item) {
-        //todo
         try {
             String userName = principal.getName();
             User user = userDao.getByUserName(userName);
             int userId = user.getId();
 
-            Product product = productDao.getById(id);
-            shoppingCartDao.update(userId, product, item.getQuantity());
+            shoppingCartDao.update(userId, id, item.getQuantity());
         }
         catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR: Internal server error when updating cart.");
         }
     }
 
-    // add a DELETE method to clear all products from the current users cart
-    // https://localhost:8080/cart
     @DeleteMapping()
     public void deleteCart(Principal principal) {
-        //todo
         try {
             String userName = principal.getName();
             User user = userDao.getByUserName(userName);
