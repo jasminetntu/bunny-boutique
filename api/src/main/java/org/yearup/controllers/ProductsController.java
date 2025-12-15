@@ -35,7 +35,7 @@ public class ProductsController
             return productDao.search(categoryId, minPrice, maxPrice, subCategory);
         }
         catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR: Internal server error when searching for product.");
         }
     }
 
@@ -51,7 +51,7 @@ public class ProductsController
             return product;
         }
         catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR: Internal server error when retrieving product by id.");
         }
     }
 
@@ -62,7 +62,7 @@ public class ProductsController
             return productDao.create(product);
         }
         catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR: Internal server error when adding product.");
         }
     }
 
@@ -70,10 +70,10 @@ public class ProductsController
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateProduct(@PathVariable int id, @RequestBody Product product) {
         try {
-            productDao.create(product);
+            productDao.update(id, product);
         }
         catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR: Internal server error when updating product.");
         }
     }
 
@@ -89,7 +89,7 @@ public class ProductsController
             productDao.delete(id);
         }
         catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR: Internal server error when deleting product.");
         }
     }
 }
