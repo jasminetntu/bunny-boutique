@@ -1,7 +1,6 @@
 package org.yearup.data.mysql;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import org.yearup.data.ShoppingCartDao;
 import org.yearup.models.Product;
@@ -9,7 +8,6 @@ import org.yearup.models.ShoppingCart;
 import org.yearup.models.ShoppingCartItem;
 
 import javax.sql.DataSource;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +20,7 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         super(dataSource);
     }
 
+    @Override
     public ShoppingCart getByUserId(int userId) {
         ShoppingCart cart = new ShoppingCart();
 
@@ -60,6 +59,7 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         return cart;
     }
 
+    @Override
     public ShoppingCartItem addToCart(int userId, int productId) {
         String sql = """
                 INSERT INTO shopping_cart (user_id, product_id, quantity)
@@ -88,6 +88,7 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         return getItemById(userId, productId);
     }
 
+    @Override
     public void update(int userId, int productId, int quantity) {
         String sql = """
                 UPDATE shopping_cart
@@ -117,6 +118,7 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         }
     }
 
+    @Override
     public void delete(int userId) {
         String sql = """
                 DELETE FROM shopping_cart
