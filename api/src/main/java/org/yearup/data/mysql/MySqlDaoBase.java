@@ -13,8 +13,7 @@ public abstract class MySqlDaoBase
         this.dataSource = dataSource;
     }
 
-    protected Connection getConnection() throws SQLException
-    {
+    protected Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 }
