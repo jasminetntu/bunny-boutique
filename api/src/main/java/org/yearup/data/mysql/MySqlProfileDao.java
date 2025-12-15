@@ -15,6 +15,12 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao {
     }
 
     @Override
+    public Profile getByUserId(int userId) {
+        //todo
+        return null;
+    }
+
+    @Override
     public Profile create(Profile profile) {
         String sql = "INSERT INTO profiles (user_id, first_name, last_name, phone, email, address, city, state, zip) " +
                 " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -38,6 +44,11 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao {
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void update(Profile profile) {
+        //todo
     }
 
 }

@@ -3,7 +3,8 @@ package org.yearup.data;
 
 import org.yearup.models.Profile;
 
-public interface ProfileDao
-{
+public interface ProfileDao {
+    Profile getByUserId(int userId);
     Profile create(Profile profile);
+    void update(Profile profile);
 }
