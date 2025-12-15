@@ -36,8 +36,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
             }
         }
         catch (SQLException e) {
-            System.out.println("ERROR: Something went wrong when fetching all categories.");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return categories;
@@ -60,8 +59,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
             }
         }
         catch (SQLException e) {
-            System.out.println("ERROR: Something went wrong when fetching category by id.");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return null; // if not found
@@ -91,8 +89,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
             }
         }
         catch (SQLException e) {
-            System.out.println("ERROR: Something went wrong when creating new category.");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return null;
@@ -114,8 +111,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
             ps.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println("ERROR: Something went wrong when updating category.");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -132,8 +128,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
             ps.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println("ERROR: Something went wrong when deleting category.");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

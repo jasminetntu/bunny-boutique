@@ -34,7 +34,7 @@ public class ProductsController
         try {
             return productDao.search(categoryId, minPrice, maxPrice, subCategory);
         }
-        catch(Exception ex) {
+        catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
     }
