@@ -39,7 +39,16 @@ public class ProfileController {
     }
 
     @PutMapping()
-    public void updateProfile(@RequestBody Profile profile) {
-        //todo
+    public void updateProfile(Principal principal, @RequestBody Profile profile) {
+        try {
+            String userName = principal.getName(); // get currently logged in username
+            User user = userDao.getByUserName(userName); // find db user by username
+            int userId = user.getId(); // get userId
+
+            profileDao.update(userId, profile);
+        }
+        catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR: Internal server error when retrieving profile.");
+        }
     }
 }
