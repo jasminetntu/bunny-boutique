@@ -94,6 +94,10 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
                 SET quantity = ?
                 WHERE user_id = ? AND product_id = ?;""";
 
+        if (getItemById(userId, productId) == null) { // if item NOT in cart
+            throw new RuntimeException("ERROR: Cannot update quantity of an item not in cart yet.");
+        }
+
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
