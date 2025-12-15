@@ -4,8 +4,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ShoppingCart
-{
+public class ShoppingCart {
     private Map<Integer, ShoppingCartItem> items = new HashMap<>();
 
     public Map<Integer, ShoppingCartItem> getItems()
@@ -33,12 +32,11 @@ public class ShoppingCart
         return items.get(productId);
     }
 
-    public BigDecimal getTotal()
-    {
+    public BigDecimal getTotal() {
         BigDecimal total = items.values()
                                 .stream()
-                                .map(i -> i.getLineTotal())
-                                .reduce( BigDecimal.ZERO, (lineTotal, subTotal) -> subTotal.add(lineTotal));
+                                .map(ShoppingCartItem::getLineTotal)
+                                .reduce(BigDecimal.ZERO, (lineTotal, subTotal) -> subTotal.add(lineTotal));
 
         return total;
     }

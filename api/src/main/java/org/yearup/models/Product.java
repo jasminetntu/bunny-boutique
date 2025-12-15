@@ -14,12 +14,9 @@ public class Product
     private boolean isFeatured;
     private String imageUrl;
 
-    public Product()
-    {
-    }
+    public Product() {}
 
-    public Product(int productId, String name, BigDecimal price, int categoryId, String description, String subCategory, int stock, boolean isFeatured, String imageUrl)
-    {
+    public Product(int productId, String name, BigDecimal price, int categoryId, String description, String subCategory, int stock, boolean isFeatured, String imageUrl) {
         this.productId = productId;
         this.name = name;
         this.price = price;
