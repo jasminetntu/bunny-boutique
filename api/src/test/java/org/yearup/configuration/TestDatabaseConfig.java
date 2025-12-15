@@ -32,8 +32,7 @@ public class TestDatabaseConfig
     public TestDatabaseConfig(@Value("${datasource.url}") String serverUrl,
                               @Value("${datasource.username}") String username,
                               @Value("${datasource.password}") String password,
-                              @Value("${datasource.testdb}") String testDb)
-    {
+                              @Value("${datasource.testdb}") String testDb) {
         this.serverUrl = serverUrl;
         this.testDb = testDb;
         this.username = username;
@@ -42,11 +41,8 @@ public class TestDatabaseConfig
 
     @PostConstruct
     public void setup() {
-
-        try(Connection connection = DriverManager.getConnection(serverUrl + "/sys", username, password);
-            Statement statement = connection.createStatement();
-        )
-        {
+        try (Connection connection = DriverManager.getConnection(serverUrl, username, password); // before: serverUrl + "/sys"
+            Statement statement = connection.createStatement()) {
             statement.execute("DROP DATABASE IF EXISTS " + testDb + ";");
             statement.execute("CREATE DATABASE " + testDb + ";");
         }
@@ -56,20 +52,16 @@ public class TestDatabaseConfig
     @PreDestroy
     public void cleanup() {
 
-        try(Connection connection = DriverManager.getConnection(serverUrl + "/sys", username, password);
-            Statement statement = connection.createStatement();
-        )
-        {
+        try (Connection connection = DriverManager.getConnection(serverUrl, username, password); // before: serverUrl + "/sys"
+            Statement statement = connection.createStatement()) {
             statement.execute("DROP DATABASE IF EXISTS " + testDb + ";");
         }
         catch (SQLException ignored){}
 
     }
 
-
     @Bean
-    public DataSource dataSource() throws SQLException, IOException
-    {
+    public DataSource dataSource() throws SQLException, IOException {
         SingleConnectionDataSource dataSource = new SingleConnectionDataSource();
         dataSource.setUrl(String.format("%s/%s", serverUrl, testDb));
         dataSource.setUsername(username);

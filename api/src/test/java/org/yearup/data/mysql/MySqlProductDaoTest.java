@@ -7,6 +7,7 @@ import org.yearup.models.Product;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,6 +18,27 @@ class MySqlProductDaoTest extends BaseDaoTestClass {
     public void setup()
     {
         dao = new MySqlProductDao(dataSource);
+    }
+
+    @Test
+    public void search_shouldReturn_correctProductList() {
+        // arrange
+        int categoryId = 1;
+        BigDecimal minPrice = new BigDecimal("200");
+        BigDecimal maxPrice = new BigDecimal("1000");
+        String subCategory = "";
+
+        int expectedLength = 2;
+        String expectedName1 = "Smartphone";
+        String expectedName2 = "Laptop";
+
+        // act
+        List<Product> actual = dao.search(categoryId, minPrice, maxPrice, subCategory);
+
+        // assert
+        assertEquals(expectedLength, actual.size(), "Because I tried to search for products.");
+        assertEquals(expectedName1, actual.get(0).getName(), "Because I tried to search for products.");
+        assertEquals(expectedName2, actual.get(1).getName(), "Because I tried to search for products.");
     }
 
     @Test
