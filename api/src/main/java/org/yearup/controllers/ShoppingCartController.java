@@ -44,7 +44,6 @@ public class ShoppingCartController {
             return shoppingCartDao.getByUserId(userId);
         }
         catch (Exception e) {
-            e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR: Internal server error when retrieving cart.");
         }
     }
