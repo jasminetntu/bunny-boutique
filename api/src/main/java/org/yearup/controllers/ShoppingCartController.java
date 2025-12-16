@@ -33,7 +33,7 @@ public class ShoppingCartController {
 
     // NOTE: each method in this controller requires a Principal object as a parameter
 
-    @GetMapping()
+    @GetMapping("")
     public ShoppingCart getCart(Principal principal) {
         try {
             String userName = principal.getName(); // get currently logged in username
@@ -49,7 +49,7 @@ public class ShoppingCartController {
     }
 
     @PostMapping("products/{id}")
-    public ShoppingCartItem addItem(Principal principal, @PathVariable int id) {
+    public ShoppingCart addItem(Principal principal, @PathVariable int id) {
         try {
             String userName = principal.getName();
             User user = userDao.getByUserName(userName);
@@ -63,27 +63,27 @@ public class ShoppingCartController {
     }
 
     @PutMapping("products/{id}")
-    public void updateItem(Principal principal, @PathVariable int id, @RequestBody ShoppingCartItem item) {
+    public ShoppingCart updateItem(Principal principal, @PathVariable int id, @RequestBody ShoppingCartItem item) {
         try {
             String userName = principal.getName();
             User user = userDao.getByUserName(userName);
             int userId = user.getId();
 
-            shoppingCartDao.update(userId, id, item.getQuantity());
+            return shoppingCartDao.update(userId, id, item.getQuantity());
         }
         catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR: Internal server error when updating cart.");
         }
     }
 
-    @DeleteMapping()
-    public void deleteCart(Principal principal) {
+    @DeleteMapping("")
+    public ShoppingCart deleteCart(Principal principal) {
         try {
             String userName = principal.getName();
             User user = userDao.getByUserName(userName);
             int userId = user.getId();
 
-            shoppingCartDao.delete(userId);
+            return shoppingCartDao.delete(userId);
         }
         catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR: Internal server error when deleting cart.");

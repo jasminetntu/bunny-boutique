@@ -60,7 +60,7 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
     }
 
     @Override
-    public ShoppingCartItem addToCart(int userId, int productId) {
+    public ShoppingCart addToCart(int userId, int productId) {
         String sql = """
                 INSERT INTO shopping_cart (user_id, product_id, quantity)
                 VALUES (?, ?, ?);""";
@@ -85,11 +85,11 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
             throw new RuntimeException(e);
         }
 
-        return getItemById(userId, productId);
+        return getByUserId(userId);
     }
 
     @Override
-    public void update(int userId, int productId, int quantity) {
+    public ShoppingCart update(int userId, int productId, int quantity) {
         String sql = """
                 UPDATE shopping_cart
                 SET quantity = ?
@@ -116,10 +116,12 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        return getByUserId(userId);
     }
 
     @Override
-    public void delete(int userId) {
+    public ShoppingCart delete(int userId) {
         String sql = """
                 DELETE FROM shopping_cart
                 WHERE user_id = ?;""";
@@ -133,6 +135,8 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        return getByUserId(userId);
     }
 
 //    ------------------------------------

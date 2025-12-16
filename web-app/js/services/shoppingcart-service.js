@@ -10,9 +10,9 @@ class ShoppingCartService {
     addToCart(productId)
     {
         const url = `${config.baseUrl}/cart/products/${productId}`;
-        // const headers = userService.getHeaders();
+        const headers = userService.getHeaders();
 
-        axios.post(url, {})// ,{headers})
+        axios.post(url, {}, {headers})
             .then(response => {
                 this.setCart(response.data)
 
@@ -134,9 +134,31 @@ class ShoppingCartService {
         outerDiv.appendChild(descriptionDiv);
 
         let quantityDiv = document.createElement("div")
-        quantityDiv.innerText = `Quantity: ${item.quantity}`;
-        outerDiv.appendChild(quantityDiv)
+        // changed this to allow updating quantity
+        // quantityDiv.innerText = `Quantity: ${item.quantity}`;
 
+        // customize label
+        let quantityLabel = document.createElement("label")
+        quantityLabel.innerText = "Quantity: ";
+
+        // customize input
+        let quantityInput = document.createElement("input")
+        quantityInput.type = "number"; //up & down arrows
+        quantityInput.min = "0";
+        quantityInput.value = item.quantity;
+        // quantityInput.classList.add("quantity-input"); // css class for styling
+
+        // event listener to change whenever user changes quantity
+        quantityInput.addEventListener('change', (event) => {
+            const newQuantity = parseInt(event.target.value)
+
+            cartService.updateItemQuantity(item.product.productId, newQuantity);
+        });
+
+        quantityDiv.appendChild(quantityLabel);
+        quantityDiv.appendChild(quantityInput);
+
+        outerDiv.appendChild(quantityDiv);
 
         parent.appendChild(outerDiv);
     }
@@ -184,6 +206,33 @@ class ShoppingCartService {
         catch (e) {
 
         }
+    }
+
+    updateItemQuantity(productId, newQuantity) {
+        const url = `${config.baseUrl}/cart/products/${productId}`;
+
+        const headers = userService.getHeaders();
+
+        const body = {
+            quantity: newQuantity
+        };
+
+        axios.put(url, body, {headers})
+             .then(response => {
+                 this.setCart(response.data)
+
+                 this.updateCartDisplay()
+                 this.loadCartPage()
+
+             })
+             .catch(error => {
+
+                 const data = {
+                     error: "Update cart quantity failed."
+                 };
+
+                 templateBuilder.append("error", data, "errors")
+             })
     }
 }
 
