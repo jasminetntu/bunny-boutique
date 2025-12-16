@@ -9,6 +9,18 @@ function hideModalForm()
     templateBuilder.clear('login');
 }
 
+function toggleHero(show)
+{
+    const heroSection = document.getElementById('hero-section');
+    if (!heroSection) return; // exit if hero doesn't exist
+
+    if (show) {
+        heroSection.classList.remove('hidden');
+    } else {
+        heroSection.classList.add('hidden');
+    }
+}
+
 function login()
 {
     const username = document.getElementById("username").value;
@@ -34,11 +46,14 @@ function loadHome()
 
     productService.search();
     categoryService.getAllCategories(loadCategories);
+
+    toggleHero(true);
 }
 
 function editProfile()
 {
     profileService.loadProfile();
+    toggleHero(false);
 }
 
 function saveProfile()
@@ -69,6 +84,7 @@ function saveProfile()
 function showCart()
 {
     cartService.loadCartPage();
+    toggleHero(false);
 }
 
 function clearCart()

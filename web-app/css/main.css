@@ -1,62 +1,51 @@
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* custom fonts */
 
-    height: 10vh;
+@font-face {
+  font-family: "VT323";
 
-    padding: 5px 15px;
-    border-bottom: solid 1px #e17055;
-    box-shadow: 5px 2px #e17055;
-    background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
-    color: #2d3436;
+  src: url('../fonts/VT323-Regular.ttf') format('truetype');
+
+  font-weight: normal;
+  font-style: normal;
 }
 
-header img {
-    height: 100%;
+@font-face {
+  font-family: "Nunito";
+
+  src: url('../fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nunito";
+
+  src: url('../fonts/Nunito-Italic-VariableFont_wght.ttf') format('truetype');
+
+  font-weight: normal;
+  font-style: italic;
 }
 
-header div {
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
+@font-face {
+  font-family: "La Belle Aurore";
+
+  src: url('../fonts/LaBelleAurore-Regular.ttf') format('truetype');
+
+  font-weight: normal;
+  font-style: normal;
 }
 
-header #links {
-    gap: 20px;
-    justify-content: flex-start;
-    align-items: flex-end;
-    padding-right: 20px;
-}
+/* styling */
 
-header a {
-    color: #2d3436;
-    text-decoration: none;
-}
-
-header a:hover {
-    color: #e17055;
-}
-
-header .cart {
-    font-size: x-large;
-    padding-left: 10px;
-    padding-right: 10px;
-    cursor: pointer;
-}
-
-header .cart #cart-items {
-    font-size: .7em;
-    height: 50%;
-    align-items: start;
-    padding-left: 5px;
+body {
+    font-family: "Nunito", Arial, Helvetica, sans-serif;
 }
 
 main {
     display: grid;
     grid-template-columns: 350px auto;
-    margin-top: 15px;
-    height: 87vh;
+    /* margin-top: 15px; */
+    height: 90vh;
 }
 
 main > .filter-box {
@@ -65,7 +54,7 @@ main > .filter-box {
 }
 
 main #min-price .slider-selection {
-    background: #BABABA;
+    background: #cee2d6;
 }
 
 main > .content {
@@ -135,7 +124,7 @@ main > .content-form .cart-item {
 
 .product .price {
     font-weight: 900;
-    color: #e17055;
+    color: #ce87ab;
 }
 
 .modal-body img {
@@ -143,7 +132,21 @@ main > .content-form .cart-item {
 }
 
 .product > .add-button {
+    /* background-color: hsl(130, 43%, 95%); */
     display: flex;
+}
+
+/* BUTTON STYLING */
+
+.btn-success {
+    background-color: hsl(132, 22%, 64%) !important;
+    border-color: hsl(132, 22%, 64%) !important;
+    color: white; 
+}
+
+.btn-success:hover {
+    background-color: hsl(331, 55%, 69%) !important;
+    border-color: hsl(331, 55%, 69%) !important;
 }
 
 .visible {

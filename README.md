@@ -1,4 +1,4 @@
-# 🐰 Bunny Boutique
+# 🎀 Bunny Boutique
 > **Capstone 3: E-Commerce API & Site**
 >
 > Year Up United (Bay Bytes) - _Technical Academy Fall 2025_

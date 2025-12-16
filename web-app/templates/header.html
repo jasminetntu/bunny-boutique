@@ -8,7 +8,8 @@
 </div>
 
 <div>
-    Welcome&nbsp;<span style="font-weight: bold">{{username}}</span>&nbsp;|&nbsp;<a href="#" onclick="userService.logout();return false;">logout</a>
+    <a>Welcome,&nbsp;{{username}}!&nbsp;|&nbsp;</a>
+    <a href="#" onclick="userService.logout();return false;">Logout&nbsp;&nbsp;</a>
     <div class="cart" onclick="showCart()">
         <i class="fa-solid fa-cart-shopping"></i>
         <div id="cart-items">0</div>
@@ -22,6 +23,6 @@
 </div>
 
 <div>
-    <a href="#"  onclick="showLoginForm();return false;">login</a>
+    <a href="#"  onclick="showLoginForm();return false;">Login</a>
 </div>
 {{/loggedout}}

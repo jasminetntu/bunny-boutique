@@ -1,0 +1,107 @@
+/* custom fonts */
+
+@font-face {
+  font-family: "VT323";
+
+  src: url('../fonts/VT323-Regular.ttf') format('truetype');
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+
+  src: url('../fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nunito";
+
+  src: url('../fonts/Nunito-Italic-VariableFont_wght.ttf') format('truetype');
+
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "La Belle Aurore";
+
+  src: url('../fonts/LaBelleAurore-Regular.ttf') format('truetype');
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* styling */
+
+body {
+    font-family: "Nunito", Arial, Helvetica, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 10vh;
+
+    padding: 7px 15px;
+    /* border-bottom: solid 0.5px hsl(330, 22%, 75%); */
+    box-shadow: 0px 5px 5px hsla(344, 12%, 25%, 0.241);
+    /* background: linear-gradient(20deg, hsl(331, 100%, 95%), hsl(335, 66%, 80%)); */
+    /* background: linear-gradient(20deg, hsl(331, 100%, 95%), hsl(131, 38%, 80%)); */
+    background: linear-gradient(20deg, hsl(331, 30%, 79%), hsl(132, 32%, 79%));
+    color: #ffffff;
+
+    position: sticky; 
+    top: 0;
+    z-index: 100;
+}
+
+header img {
+    height: 100%;
+}
+
+header div {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+header #links {
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-right: 20px;
+}
+
+header a {
+    /* font-family: "La Belle Aurore", Arial, Helvetica, sans-serif; */
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-style: italic;
+}
+
+header a:hover {
+    color: #ce87ab;
+}
+
+header .cart {
+    font-family: "La Belle Aurore", Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+header .cart #cart-items {
+    font-size: .7em;
+    height: 50%;
+    align-items: start;
+    padding-left: 5px;
+}
