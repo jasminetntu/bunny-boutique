@@ -42,6 +42,8 @@ function showImageDetailForm(product, imageUrl)
 
 function loadHome()
 {
+    document.querySelector('main').style.display = 'grid';
+    
     templateBuilder.build('home',{},'main')
 
     productService.search();
@@ -83,6 +85,7 @@ function saveProfile()
 
 function showCart()
 {
+    document.querySelector('main').style.display = 'block';
     cartService.loadCartPage();
     toggleHero(false);
 }
