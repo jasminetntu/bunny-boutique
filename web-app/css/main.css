@@ -176,37 +176,39 @@ main > .content-form .cart-item {
     display: flex;
 }
 
-/* PROFILE & CART STYLING */
+/* PROFILE STYLING */
 
-.profile-page, .cart-page {
+.profile-page {
     display: flex;
     justify-content: center;
     width: 100%;
     grid-column: 1 / -1; /* span across both grid columns (ignore filter) */
 }
 
-.profile-page .content-form,
-.cart-page .content-form {
+.profile-page .content-form {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
-.profile-page .filter-box,
-.cart-page .filter-box {
-    display: none;
-}
-
 .profile-page h1 {
     padding-top: 50px;
 }
 
-.cart-header {
-    padding-top: 50px;
+/* SLIDER STYLING */
+
+/* track */
+input#min-price.form-range::-webkit-slider-runnable-track,
+input#max-price.form-range::-webkit-slider-runnable-track {
+    background: linear-gradient(20deg, hsl(330, 32%, 89%), hsl(129, 23%, 89%));
 }
 
-
+/* circle */
+input#min-price.form-range::-webkit-slider-thumb,
+input#max-price.form-range::-webkit-slider-thumb {
+    background: #c39eb1;
+}
 
 /* BUTTON STYLING */
 
@@ -262,6 +264,8 @@ main > .content-form .cart-item {
 
 .alert {
     margin-bottom: 2px !important;
+    background-color: #ce87ab;
+    padding-top: 15px;
 }
 
 

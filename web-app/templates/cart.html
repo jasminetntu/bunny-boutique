@@ -1,15 +1,32 @@
 <div class="cart-page">
-  <div class="filter-box" style="display: none;">
+  <div class="filter-box cart-hidden-filter">
     &nbsp;
   </div>
 
   <div id="content" class="content-form">
     <div class="cart-header">
-      <h1>Cart</h1>
+      <h1>Your Cart</h1>
       <button class="btn btn-danger" onclick="clearCart()">Clear</button>
     </div>
-  <div id="cart-item-list">
-  </div>
 
+    <div class="cart-flex-wrapper">
+      
+      <div id="cart-item-list" class="cart-items-left">
+         <p class="text-muted">Your items will appear here...</p>
+      </div>
+
+      <div class="cart-summary-right">
+        <div class="summary-box">
+          <h3>Order Summary</h3>
+          <hr>
+          <div class="summary-row">
+            <span>Total:</span>
+            <span id="cart-total">$0.00</span>
+          </div>
+          <button class="btn btn-success w-100 mt-3" onclick="handleCheckout()">Checkout</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>

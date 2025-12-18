@@ -43,7 +43,7 @@ function showImageDetailForm(product, imageUrl)
 function loadHome()
 {
     document.querySelector('main').style.display = 'grid';
-    
+
     templateBuilder.build('home',{},'main')
 
     productService.search();
@@ -94,6 +94,31 @@ function clearCart()
 {
     cartService.clearCart();
     cartService.loadCartPage();
+}
+
+function handleCheckout() {
+    ordersService.createOrder()
+        .then(order => {
+            const successData = {
+                message: `Order #${order.orderId} placed successfully!`
+            };
+
+            // Show success using the existing message template
+            templateBuilder.append("message", successData, "errors");
+
+            cartService.clearCart();
+
+            // clear local cart display
+            const cartList = document.getElementById('cart-item-list');
+            if (cartList) cartList.innerHTML = "<h3>Thank you for your order!</h3>";
+            const totalEl = document.getElementById('cart-total');
+            if (totalEl) totalEl.innerText = "$0.00";
+        })
+        .catch(error => {
+            const data = { error: 'Checkout failed. Please try again.' };
+            templateBuilder.append('error', data, 'errors');
+            console.error(error);
+        });
 }
 
 function setCategory(control)

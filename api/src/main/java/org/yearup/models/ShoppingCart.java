@@ -32,6 +32,10 @@ public class ShoppingCart {
         return items.get(productId);
     }
 
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
+
     public BigDecimal getTotal() {
         BigDecimal total = items.values()
                                 .stream()

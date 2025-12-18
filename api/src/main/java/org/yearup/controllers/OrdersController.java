@@ -1,10 +1,12 @@
 package org.yearup.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.yearup.data.*;
 import org.yearup.models.*;
 
@@ -39,6 +41,10 @@ public class OrdersController {
 
         Profile profile = profileDao.getByUserId(userId);
         ShoppingCart shoppingCart = shoppingCartDao.getByUserId(userId);
+
+        if (shoppingCart.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR: Cart cannot be empty when adding order.");
+        }
 
         Order order = ordersDao.create(profile, shoppingCart.getTotal());
         int orderId = order.getOrderId();
