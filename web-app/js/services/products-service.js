@@ -38,10 +38,13 @@ class ProductService {
 
     constructor() {
 
-        //load list of photos into memory
+        // Attempt to load a photos index if present (optional). Missing index is non-fatal.
         axios.get("/images/products/photos.json")
             .then(response => {
                 this.photos = response.data;
+            })
+            .catch(() => {
+                // ignore - we'll still compute imageSrc directly from config.imageBase
             });
     }
 
@@ -96,13 +99,26 @@ class ProductService {
                  let data = {};
                  data.products = response.data;
 
-                 data.products.forEach(product => {
-                     if(!this.hasPhoto(product.imageUrl))
-                     {
-                         product.imageUrl = "no-image.jpg";
-                     }
-                 })
+                data.products.forEach(product => {
+                    // if backend didn't provide image filename, use placeholder name
+                    if(!product.imageUrl || product.imageUrl === null || product.imageUrl === undefined)
+                    {
+                        product.imageUrl = "no-image.jpg";
+                    }
 
+                    try {
+                        if(product.imageUrl === 'no-image.jpg'){
+                            product.imageSrc = `/images/products/new/no-image.jpg`;
+                        }
+                        else {
+                            product.imageSrc = `${config.imageBase}/${product.imageUrl}`;
+                        }
+                    }
+                    catch (e) {
+                        // if config isn't available, fall back to legacy path
+                        product.imageSrc = `/images/products/${product.imageUrl}`;
+                    }
+                })
                  templateBuilder.build('product', data, 'content', this.enableButtons);
 
              })

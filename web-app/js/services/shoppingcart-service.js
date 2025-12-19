@@ -167,7 +167,7 @@ class ShoppingCartService {
         let photoDiv = document.createElement("div");
         photoDiv.classList.add("photo")
         let img = document.createElement("img");
-        img.src = `/images/products/${item.product.imageUrl}`
+        img.src = item.product.imageSrc || `${config.imageBase}/${item.product.imageUrl}`;
         img.addEventListener("click", () => {
             showImageDetailForm(item.product.name, img.src)
         })
