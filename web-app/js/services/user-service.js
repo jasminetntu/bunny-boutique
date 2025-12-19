@@ -93,7 +93,12 @@ class UserService {
 
         axios.post(url, register)
              .then(response => {
-                 console.log(response.data)
+                 // on successful registration, show success and auto-login
+                 const data = { message: 'Registration successful. Logging you in...' };
+                 templateBuilder.append('message', data, 'errors');
+
+                 // auto-login after successful registration
+                 this.login(username, password);
              })
             .catch(error => {
 

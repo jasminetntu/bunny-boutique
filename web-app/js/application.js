@@ -4,6 +4,11 @@ function showLoginForm()
     templateBuilder.build('login-form', {}, 'login');
 }
 
+function showRegisterForm()
+{
+    templateBuilder.build('register-form', {}, 'login');
+}
+
 function hideModalForm()
 {
     templateBuilder.clear('login');
@@ -27,6 +32,16 @@ function login()
     const password = document.getElementById("password").value;
 
     userService.login(username, password);
+    hideModalForm()
+}
+
+function register()
+{
+    const username = document.getElementById("reg-username").value;
+    const password = document.getElementById("reg-password").value;
+    const confirm = document.getElementById("reg-confirm").value;
+
+    userService.register(username, password, confirm);
     hideModalForm()
 }
 
