@@ -30,6 +30,7 @@ Built with Java, HTML, CSS, and JavaScript to gain familiarity with APIs through
 Follow these steps to get both the backend API and the frontend website running on your local machine.
 
 🌸 **1. Clone the Repository**
+
 Open your terminal and run the following command to download the project:
 
 ``` bash
@@ -37,11 +38,13 @@ git clone https://github.com/jasminetntu/bunny-boutique.git
 ```
 
 🌸 **2. Set Up the Database**
+
 Before running the code, you must initialize the MySQL database.
 - Locate the script: `api/database/create_database_bunnyboutique.sql`.
 - Run this script in your preferred MySQL workbench or CLI to create the tables and populate with the initial data.
 
 🌸 **3. Launch the Backend (API)**
+
 It is important to open the api folder specifically as its own project in your IDE (e.g., IntelliJ) rather than opening the entire root folder.
 - **Open Project**: Open the api directory in your IDE.
 - **Configure Run Profile**: Create a new Application run configuration for `BunnyBoutiqueApplication.java`.
@@ -51,12 +54,14 @@ It is important to open the api folder specifically as its own project in your I
 - **Run**: Start the application. Keep this process running in the background to handle data requests from the frontend.
 
 🌸 **4. Launch the Frontend (Web App)**
+
 Now that the server is active, you can launch the interface.
 - **Open Project**: Open the web-app folder in a code editor (like VS Code).
 - **Launch**: Locate index.html in the root of the web-app folder.
 - **View**: Launch the website through `index.html` on your IDE (right-click & "Open with Live Server" on VS Code).
 
 🌸 **5. Test Credentials**
+
 Once the site is loaded, you can log in using the following test account:
 - **Username**: user
 - **Password**: password
