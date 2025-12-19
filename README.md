@@ -18,7 +18,6 @@ Built with Java, HTML, CSS, and JavaScript to gain familiarity with APIs through
 - **Restricted API Access**: Secure backend communication using Principal-based authentication to ensure users can only access their own shopping carts and order history.
 
 ### 💘 Future Features
-- **Register/Sign-Up**: Allow users to easily register for an account on the web page.
 - **Order History**: Allow users to view their past orders and tracking status.
 - **Admin Dashboard**: An interface for store owners to add new products or update stock levels.
 - **Stock Display**: Show which items are in stock and out of stock.
