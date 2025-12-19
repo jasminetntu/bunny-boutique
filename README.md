@@ -7,7 +7,20 @@
 ## 🐰 Description
 A custom e-commerce application with a web interface, designed for a fictional clothing store named "Bunny Boutique." This tool allows customers to browse clothes, update their profile, add items to cart, and checkout their order.
 
-Built with Java, HTML, CSS, and JavaScript to gain familiarity with APIs through Spring Boot, SQL/MySQL, and full-stack development.
+This application follows a standard client-server model where the frontend interacts with the Spring Boot backend through defined API contracts. The goal was to familiarize myself with full-stack integration and the lifecycle of an API request from the UI to the database.
+
+---
+### ⚙️ Tech Stack
+🌱 **Backend**
+- **Java (Maven)**: The core programming language used for application logic.
+- **Spring / Spring Boot**: The primary framework used to bootstrap the application, manage dependencies, and build scalable REST APIs.
+- **SQL / MySQL**: Used for relational database management, data persistence, and structured querying.
+- **Postman**: Utilized as the primary tool for API testing, allowing for the validation of endpoints, headers, and JSON responses.
+
+🌱 **Frontend**
+- **HTML5**: Provides the structural backbone of the web interface.
+- **CSS3**: Used for styling and responsive design to ensure a clean user experience.
+- **JavaScript**: Enables dynamic behavior and handles asynchronous communication with the backend APIs.
 
 ---
 ### 🗝️ Key Features
