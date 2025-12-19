@@ -30,7 +30,7 @@ Built with Java, HTML, CSS, and JavaScript to gain familiarity with APIs through
 ## 🍀 Quick Start
 Follow these steps to get both the backend API and the frontend website running on your local machine.
 
-**1. Clone the Repository**
+🌸 **1. Clone the Repository**
 Open your terminal and run the following command to download the project:
 
 ``` bash
