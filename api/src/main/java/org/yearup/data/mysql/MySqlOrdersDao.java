@@ -10,13 +10,32 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDate;
 
+/**
+ * MySQL implementation of the {@link OrdersDao} interface.
+ * <p>
+ * Provides methods to retrieve and create orders in the database.
+ * Each method interacts with the 'orders' table.
+ * </p>
+ */
 @Component
 public class MySqlOrdersDao extends MySqlDaoBase implements OrdersDao {
+
+    /**
+     * Constructs a {@code MySqlOrdersDao} with the given {@link DataSource}.
+     *
+     * @param dataSource the {@link DataSource} used for database connections
+     */
     public MySqlOrdersDao(DataSource dataSource)
     {
         super(dataSource);
     }
 
+    /**
+     * Retrieves an {@link Order} by its ID.
+     *
+     * @param orderId the ID of the order
+     * @return the {@link Order} if found, or {@code null} if not found
+     */
     @Override
     public Order getById(int orderId) {
         String sql = """
@@ -43,6 +62,13 @@ public class MySqlOrdersDao extends MySqlDaoBase implements OrdersDao {
         return null;
     }
 
+    /**
+     * Creates a new {@link Order} in the database for the specified {@link Profile}.
+     *
+     * @param profile the {@link Profile} of the user placing the order
+     * @param total   the total amount including shipping
+     * @return the created {@link Order} with the generated ID, or {@code null} if creation failed
+     */
     @Override
     public Order create(Profile profile, BigDecimal total) {
         String sql = """

@@ -5,6 +5,13 @@ import org.yearup.models.Product;
 import java.math.BigDecimal;
 import java.util.List;
 
+
+/**
+ * Data Access Object (DAO) interface for {@link Product} entities.
+ * <p>
+ * Defines methods for searching, retrieving, creating, updating, and deleting products in the database.
+ * </p>
+ */
 public interface ProductDao
 {
     List<Product> search(Integer categoryId, BigDecimal minPrice, BigDecimal maxPrice, String subCategory);

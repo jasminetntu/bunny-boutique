@@ -15,6 +15,9 @@ import org.yearup.models.User;
 
 import java.security.Principal;
 
+/**
+ * REST controller for managing endpoints for handling shopping cart-related operations.
+ */
 @RestController
 @RequestMapping("cart")
 @PreAuthorize("hasRole('ROLE_USER')")
@@ -24,6 +27,13 @@ public class ShoppingCartController {
     private UserDao userDao;
     private ProductDao productDao;
 
+    /**
+     * Constructs a {@code ShoppingCartController} with required dependencies.
+     *
+     * @param shoppingCartDao DAO for shopping cart operations
+     * @param userDao DAO for user lookup
+     * @param productDao DAO for product lookup
+     */
     @Autowired
     public ShoppingCartController(ShoppingCartDao shoppingCartDao, UserDao userDao, ProductDao productDao) {
         this.shoppingCartDao = shoppingCartDao;
@@ -31,8 +41,12 @@ public class ShoppingCartController {
         this.productDao = productDao;
     }
 
-    // NOTE: each method in this controller requires a Principal object as a parameter
-
+    /**
+     * Retrieves the authenticated user's shopping cart.
+     *
+     * @param principal the currently authenticated user
+     * @return the user's {@link ShoppingCart}
+     */
     @GetMapping("")
     public ShoppingCart getCart(Principal principal) {
         try {
@@ -48,6 +62,13 @@ public class ShoppingCartController {
         }
     }
 
+    /**
+     * Adds a product to the authenticated user's shopping cart.
+     *
+     * @param principal the currently authenticated user
+     * @param id the ID of the product to add
+     * @return the updated {@link ShoppingCart}
+     */
     @PostMapping("products/{id}")
     public ShoppingCart addItem(Principal principal, @PathVariable int id) {
         try {
@@ -62,6 +83,14 @@ public class ShoppingCartController {
         }
     }
 
+    /**
+     * Updates the quantity of a product in the authenticated user's shopping cart.
+     *
+     * @param principal the currently authenticated user
+     * @param id the ID of the product to update
+     * @param item the shopping cart item containing the new quantity
+     * @return the updated {@link ShoppingCart}
+     */
     @PutMapping("products/{id}")
     public ShoppingCart updateItem(Principal principal, @PathVariable int id, @RequestBody ShoppingCartItem item) {
         try {
@@ -76,6 +105,12 @@ public class ShoppingCartController {
         }
     }
 
+    /**
+     * Deletes all items from the authenticated user's shopping cart.
+     *
+     * @param principal the currently authenticated user
+     * @return the emptied {@link ShoppingCart}
+     */
     @DeleteMapping("")
     public ShoppingCart deleteCart(Principal principal) {
         try {

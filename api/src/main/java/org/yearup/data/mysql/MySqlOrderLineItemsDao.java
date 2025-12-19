@@ -13,13 +13,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * MySQL implementation of the {@link OrderLineItemsDao} interface.
+ * <p>
+ * Provides methods to retrieve and create order line items in the database.
+ * Each method interacts with the 'order_line_items' table.
+ * </p>
+ */
 @Component
 public class MySqlOrderLineItemsDao extends MySqlDaoBase implements OrderLineItemsDao {
+
+    /**
+     * Constructs a {@code MySqlOrderLineItemsDao} with the given {@link DataSource}.
+     *
+     * @param dataSource the {@link DataSource} used for database connections
+     */
     public MySqlOrderLineItemsDao(DataSource dataSource)
     {
         super(dataSource);
     }
 
+    /**
+     * Retrieves an {@link OrderLineItem} by its ID.
+     *
+     * @param orderLineItemId the ID of the order line item
+     * @return the {@link OrderLineItem} if found, or {@code null} if not found
+     */
     @Override
     public OrderLineItem getById(int orderLineItemId) {
         String sql = """
@@ -46,6 +65,14 @@ public class MySqlOrderLineItemsDao extends MySqlDaoBase implements OrderLineIte
         return null;
     }
 
+    /**
+     * Creates a new {@link OrderLineItem} in the database for the specified order.
+     *
+     * @param orderId   the ID of the order
+     * @param productId the ID of the product
+     * @param cartItem  the {@link ShoppingCartItem} containing quantity, price, and discount
+     * @return the created {@link OrderLineItem} with the generated ID, or {@code null} if creation failed
+     */
     @Override
     public OrderLineItem create(int orderId, int productId, ShoppingCartItem cartItem) {
         String sql = """

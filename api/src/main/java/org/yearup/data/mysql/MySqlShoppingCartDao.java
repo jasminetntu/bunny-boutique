@@ -13,13 +13,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * MySQL implementation of the {@link ShoppingCartDao} interface.
+ * <p>
+ * Provides methods to retrieve, add, update, and delete items in a user's shopping cart.
+ * Interacts with the 'shopping_cart' and 'products' tables.
+ * </p>
+ */
 @Component
 public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDao {
+
+    /**
+     * Constructs a {@code MySqlShoppingCartDao} with the given {@link DataSource}.
+     *
+     * @param dataSource the {@link DataSource} used for database connections
+     */
     @Autowired
     public MySqlShoppingCartDao(DataSource dataSource) {
         super(dataSource);
     }
 
+    /**
+     * Retrieves the shopping cart for a specific user.
+     *
+     * @param userId the ID of the user
+     * @return a {@link ShoppingCart} containing all items for the user
+     */
     @Override
     public ShoppingCart getByUserId(int userId) {
         ShoppingCart cart = new ShoppingCart();
@@ -59,6 +78,16 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         return cart;
     }
 
+    /**
+     * Adds a product to the user's shopping cart.
+     * <p>
+     * If the product is already in the cart, increments its quantity by 1.
+     * </p>
+     *
+     * @param userId    the ID of the user
+     * @param productId the ID of the product to add
+     * @return the updated {@link ShoppingCart} for the user
+     */
     @Override
     public ShoppingCart addToCart(int userId, int productId) {
         String sql = """
@@ -88,6 +117,15 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         return getByUserId(userId);
     }
 
+    /**
+     * Updates the quantity of a product in the user's shopping cart.
+     * If the quantity <= 0, the item is removed from the cart.
+     *
+     * @param userId    the ID of the user
+     * @param productId the ID of the product to update
+     * @param quantity  the new quantity
+     * @return the updated {@link ShoppingCart} for the user
+     */
     @Override
     public ShoppingCart update(int userId, int productId, int quantity) {
         String sql = """
@@ -120,6 +158,12 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         return getByUserId(userId);
     }
 
+    /**
+     * Deletes all items from the user's shopping cart.
+     *
+     * @param userId the ID of the user
+     * @return an empty {@link ShoppingCart} for the user
+     */
     @Override
     public ShoppingCart delete(int userId) {
         String sql = """
@@ -139,10 +183,17 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         return getByUserId(userId);
     }
 
-//    ------------------------------------
-//               HELPER METHODS
-//    ------------------------------------
+    // ------------------------------------
+    //            HELPER METHODS
+    // ------------------------------------
 
+    /**
+     * Retrieves a single {@link ShoppingCartItem} by user ID and product ID.
+     *
+     * @param userId    the ID of the user
+     * @param productId the ID of the product
+     * @return the {@link ShoppingCartItem} if found, or {@code null} if not found
+     */
     private ShoppingCartItem getItemById(int userId, int productId) {
         String sql = """
                 SELECT sc.product_id, sc.quantity, p.name, p.price, p.category_id, p.description,
@@ -180,6 +231,12 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         return null; // if item not found
     }
 
+    /**
+     * Deletes a single product from the user's shopping cart.
+     *
+     * @param userId    the ID of the user
+     * @param productId the ID of the product to delete
+     */
     private void delete(int userId, int productId) {
         String sql = """
                 DELETE FROM shopping_cart

@@ -1,10 +1,8 @@
 package org.yearup.data.mysql;
 
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import org.yearup.data.CategoryDao;
 import org.yearup.models.Category;
-import org.yearup.models.Product;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -14,13 +12,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * MySQL implementation of the {@link CategoryDao} interface.
+ * <p>
+ * This DAO handles all database operations related to {@link Category}
+ * entities using JDBC and a MySQL data source.
+ * </p>
+ */
 @Component
 public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
+
+    /**
+     * Constructs a {@code MySqlCategoryDao} with the provided data source.
+     *
+     * @param dataSource the data source used to obtain database connections
+     */
     public MySqlCategoryDao(DataSource dataSource)
     {
         super(dataSource);
     }
 
+    /**
+     * Retrieves all categories from the database.
+     *
+     * @return a list of all {@link Category} records
+     */
     @Override
     public List<Category> getAllCategories() {
         List<Category> categories = new ArrayList<>();
@@ -42,6 +58,12 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
         return categories;
     }
 
+    /**
+     * Retrieves a category by its unique identifier.
+     *
+     * @param categoryId the ID of the category
+     * @return the matching {@link Category}, or {@code null} if not found
+     */
     @Override
     public Category getById(int categoryId) {
         String sql = """
@@ -65,6 +87,12 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
         return null; // if not found
     }
 
+    /**
+     * Creates a new category in the database.
+     *
+     * @param category the category to create
+     * @return the newly created {@link Category} with its generated ID
+     */
     @Override
     public Category create(Category category) {
         String sql = """
@@ -95,6 +123,12 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
         return null;
     }
 
+    /**
+     * Updates an existing category in the database.
+     *
+     * @param categoryId the ID of the category to update
+     * @param category the updated category data
+     */
     @Override
     public void update(int categoryId, Category category) {
         String sql = """
@@ -115,6 +149,11 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
         }
     }
 
+    /**
+     * Deletes a category from the database by ID.
+     *
+     * @param categoryId the ID of the category to delete
+     */
     @Override
     public void delete(int categoryId) {
         String sql = """
@@ -132,6 +171,13 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
         }
     }
 
+    /**
+     * Maps a single database row to a {@link Category} object.
+     *
+     * @param row the {@link ResultSet} containing category data
+     * @return a populated {@link Category} instance
+     * @throws SQLException if a database access error occurs
+     */
     private Category mapRow(ResultSet row) throws SQLException {
         int categoryId = row.getInt("category_id");
         String name = row.getString("name");

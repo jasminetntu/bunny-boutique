@@ -12,6 +12,9 @@ import org.yearup.models.Product;
 
 import java.util.List;
 
+/**
+ * REST controller for managing endpoints for product categories and their associated products.
+ */
 @RestController
 @RequestMapping("categories") // base url
 @CrossOrigin
@@ -19,12 +22,23 @@ public class CategoriesController {
     private CategoryDao categoryDao;
     private ProductDao productDao;
 
+    /**
+     * Constructs a {@code CategoriesController} with required data access objects.
+     *
+     * @param categoryDao DAO for category-related database operations
+     * @param productDao DAO for product-related database operations
+     */
     @Autowired
     public CategoriesController(CategoryDao categoryDao, ProductDao productDao) {
         this.categoryDao = categoryDao;
         this.productDao = productDao;
     }
 
+    /**
+     * Retrieves all categories.
+     *
+     * @return a list of all {@link Category} objects
+     */
     @GetMapping("")
     @PreAuthorize("permitAll()")
     public List<Category> getAll() {
@@ -36,6 +50,12 @@ public class CategoriesController {
         }
     }
 
+    /**
+     * Retrieves a category by its unique identifier.
+     *
+     * @param id the ID of the category
+     * @return the {@link Category} with the specified ID
+     */
     @GetMapping("{id}")
     @PreAuthorize("permitAll()")
     public Category getById(@PathVariable int id) {
@@ -52,8 +72,12 @@ public class CategoriesController {
         }
     }
 
-    // the url to return all products in category 1 would look like this
-    // https://localhost:8080/categories/1/products
+    /**
+     * Retrieves all products associated with a specific category.
+     *
+     * @param categoryId the ID of the category
+     * @return a list of {@link Product} objects belonging to the category
+     */
     @GetMapping("{categoryId}/products")
     @PreAuthorize("permitAll()")
     public List<Product> getProductsById(@PathVariable int categoryId) {
@@ -65,6 +89,12 @@ public class CategoriesController {
         }
     }
 
+    /**
+     * Creates a new category. Restricted to users with the ADMIN role.
+     *
+     * @param category the category to create
+     * @return the newly created {@link Category}
+     */
     @PostMapping()
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Category addCategory(@RequestBody Category category) {
@@ -76,6 +106,12 @@ public class CategoriesController {
         }
     }
 
+    /**
+     * Updates an existing category. Restricted to users with the ADMIN role.
+     *
+     * @param id the ID of the category to update
+     * @param category the updated category data
+     */
     @PutMapping("{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateCategory(@PathVariable int id, @RequestBody Category category) {
@@ -87,6 +123,11 @@ public class CategoriesController {
         }
     }
 
+    /**
+     * Deletes a category by its ID. Restricted to users with the ADMIN role.
+     *
+     * @param id the ID of the category to delete
+     */
     @DeleteMapping("{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteCategory(@PathVariable int id) {

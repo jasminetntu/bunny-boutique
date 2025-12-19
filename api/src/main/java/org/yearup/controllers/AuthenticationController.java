@@ -24,6 +24,10 @@ import org.yearup.models.User;
 import org.yearup.security.jwt.JWTFilter;
 import org.yearup.security.jwt.TokenProvider;
 
+/**
+ * REST controller responsible for handling authentication-related requests,
+ * including user login and registration, using Spring Security and JWT.
+ */
 @RestController
 @CrossOrigin
 @PreAuthorize("permitAll()")
@@ -34,6 +38,14 @@ public class AuthenticationController {
     private UserDao userDao;
     private ProfileDao profileDao;
 
+    /**
+     * Constructs an AuthenticationController with required dependencies.
+     *
+     * @param tokenProvider provider used to generate JWTs
+     * @param authenticationManagerBuilder builder for authentication managers
+     * @param userDao DAO for user-related database operations
+     * @param profileDao DAO for profile-related database operations
+     */
     public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao, ProfileDao profileDao) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
@@ -41,6 +53,12 @@ public class AuthenticationController {
         this.profileDao = profileDao;
     }
 
+    /**
+     * Authenticates a user and returns a JWT upon successful login.
+     *
+     * @param loginDto object containing username and password
+     * @return a ResponseEntity containing a LoginResponseDto and JWT header
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginDto loginDto) {
 
@@ -65,6 +83,12 @@ public class AuthenticationController {
         }
     }
 
+    /**
+     * Registers a new user and creates an associated profile.
+     *
+     * @param newUser object containing registration details
+     * @return a ResponseEntity containing the created User
+     */
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<User> register(@Valid @RequestBody RegisterUserDto newUser) {

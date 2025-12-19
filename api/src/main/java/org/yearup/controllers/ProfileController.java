@@ -11,6 +11,9 @@ import org.yearup.models.User;
 
 import java.security.Principal;
 
+/**
+ * REST controller for managing endpoints for handling profile-related operations.
+ */
 @RestController
 @RequestMapping("profile")
 @CrossOrigin
@@ -18,12 +21,24 @@ public class ProfileController {
     private ProfileDao profileDao;
     private UserDao userDao;
 
+    /**
+     * Constructs a {@code ProfileController} with required data access objects.
+     *
+     * @param profileDao DAO for profile-related operations
+     * @param userDao DAO for user-related operations
+     */
     @Autowired
     public ProfileController(ProfileDao profileDao, UserDao userDao) {
         this.profileDao = profileDao;
         this.userDao = userDao;
     }
 
+    /**
+     * Retrieves the profile for the currently authenticated user.
+     *
+     * @param principal the security principal representing the logged-in user
+     * @return the {@link Profile} associated with the current user
+     */
     @GetMapping()
     public Profile getProfile(Principal principal) {
         try {
@@ -38,6 +53,12 @@ public class ProfileController {
         }
     }
 
+    /**
+     * Updates the profile information for the currently authenticated user.
+     *
+     * @param principal the security principal representing the logged-in user
+     * @param profile the updated profile data
+     */
     @PutMapping()
     public void updateProfile(Principal principal, @RequestBody Profile profile) {
         try {
